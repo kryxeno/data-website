@@ -1,0 +1,132 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// variables
+
+$clr-grey-background: rgb(26, 26, 26);
+$clr-box-shadow: rgba(0, 0, 0, 0.3);
+$clr-box-shadow-sides: rgba(0, 0, 0, 0.1);
+
+$pad-global: 4em;
+
+// mixins
+
+@mixin bg-image($url) {
+  background: rgb(200, 151, 100);
+  background: linear-gradient(0deg, rgb(200, 123, 100) 0%, rgb(255, 218, 183) 28%, rgba(255, 254, 233, 1) 43%, rgb(137, 208, 236) 71%, rgb(128, 194, 214) 100%);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+// start css
+html {
+  position: relative;
+}
+
+body {
+  background-color: $clr-grey-background;
+  // width: 100vw;
+  // height: 100vh;
+
+  .background-image {
+    position: fixed;
+    @include bg-image("../images/large/image1.png");
+    width: 60%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -100;
+  }
+}
+
+.content-grid-container {
+  display: grid;
+  padding: $pad-global 6em;
+  height: calc(100vh - calc($pad-global * 2));
+
+  section {
+    background-color: white;
+    border-radius: 2em;
+    grid-row: 1 / 2;
+    overflow: hidden;
+
+    div {
+      margin: 0 -50%;
+      width: 200%;
+      height: 100%;
+      box-shadow: inset 0 5em 80px $clr-box-shadow;
+    }
+
+    &:nth-child(1) {
+      grid-column: 1 / 4;
+      box-shadow: inset -12vw 0 80px $clr-box-shadow-sides;
+    }
+    &:nth-child(2) {
+      grid-column: 3 / 6;
+    }
+    &:nth-child(3) {
+      grid-column: 6 / 9;
+      @include bg-image("../images/large/image2.png");
+      background-position: 41% center;
+    }
+    &:nth-child(4) {
+      @include bg-image("../images/large/image3.png");
+      background-position: 70% center;
+      box-shadow: inset 2em 0 80px $clr-box-shadow-sides;
+      grid-column: 9 / 11;
+      z-index: -10;
+    }
+  }
+}
